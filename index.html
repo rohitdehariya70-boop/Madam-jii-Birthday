@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title data-id="th-modified">For Madam Jii • 26 November ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rose: #ff4d8d;
+      --gold: #f5cb7a;
+      --text-dark: #2a1829;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at top, #1d1430 0%, #09070f 100%);
+      color: #fff;
+      overflow-x: hidden;
+      transition: background 1.2s cubic-bezier(0.22, 1, 0.36, 1), color 1s ease;
+    }
+
+    body.lit {
+      background: radial-gradient(circle at top, #fff5f8 0%, #ffe6ef 45%, #f9dce8 100%);
+      color: var(--text-dark);
+    }
+
+    /* Ambient Floating Orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(55px);
+      opacity: 0.45;
+      z-index: 0;
+      pointer-events: none;
+      animation: floatOrb 9s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 220px; height: 220px; background: #ff4d8d; top: -40px; left: -40px; }
+    .orb-2 { width: 250px; height: 250px; background: #f5cb7a; bottom: -60px; right: -40px; animation-delay: 2s; }
+
+    @keyframes floatOrb {
+      from { transform: translate(0, 0) scale(1); }
+      to { transform: translate(25px, 30px) scale(1.12); }
+    }
+
+    /* Fairy Lights */
+    .fairy-lights {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 10px;
+      z-index: 5;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.9s ease;
+      pointer-events: none;
+    }
+    body.lit .fairy-lights {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .bulb {
+      width: 10px;
+      height: 14px;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      background: #ffd166;
+      box-shadow: 0 0 12px #ffbe0b, 0 0 22px #ff4d8d;
+      animation: twinkle 1.6s infinite alternate;
+    }
+    .bulb:nth-child(even) { background: #ff758f; animation-delay: 0.7s; }
+    @keyframes twinkle {
+      from { opacity: 0.55; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1.15); }
+    }
+
+    /* Stage */
+    .stage {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      padding: 36px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+      animation: screenReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .screen.active { display: block; }
+
+    @keyframes screenReveal {
+      from { opacity: 0; transform: translateY(22px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .script-tag {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      color: var(--rose);
+      margin-bottom: 4px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.18;
+      margin-bottom: 10px;
+    }
+
+    h1 em {
+      color: var(--rose);
+      font-style: italic;
+    }
+
+    .desc {
+      font-size: 13.5px;
+      line-height: 1.65;
+      opacity: 0.82;
+      margin-bottom: 24px;
+      padding: 0 8px;
+    }
+
+    /* Password Lock Box */
+    .lock-card {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(245, 203, 122, 0.35);
+      border-radius: 22px;
+      padding: 28px 20px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    }
+    .pass-input {
+      width: 100%;
+      max-width: 240px;
+      padding: 13px 18px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(255, 117, 143, 0.5);
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      letter-spacing: 3px;
+      outline: none;
+      margin-bottom: 14px;
+      user-select: text;
+    }
+    .pass-input::placeholder {
+      letter-spacing: 1px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+    }
+    .pass-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(245, 203, 122, 0.2);
+    }
+    .err-msg {
+      color: #ff85a1;
+      font-size: 12.5px;
+      min-height: 18px;
+      margin-bottom: 12px;
+    }
+    .shake {
+      animation: shakeBox 0.35s ease;
+    }
+    @keyframes shakeBox {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+
+    /* Buttons */
+    .btn-luxe {
+      background: linear-gradient(135deg, #ff4d8d 0%, #ff758f 50%, #f5cb7a 140%);
+      color: #fff;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 999px;
+      font-size: 14.5px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(255, 77, 141, 0.38);
+      transition: transform 0.2s ease;
+    }
+    .btn-luxe:active { transform: scale(0.95); }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      color: #241323;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 999px;
+      font-size: 14.5px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(246, 211, 101, 0.35);
+      transition: transform 0.2s ease;
+    }
+    .btn-gold:active { transform: scale(0.95); }
+
+    /* Screen 1: Wax Seal Envelope */
+    .envelope-wrap {
+      width: 265px;
+      height: 185px;
+      margin: 24px auto 28px;
+      position: relative;
+      cursor: pointer;
+    }
+    .letter-slip {
+      position: absolute;
+      left: 20px; right: 20px; top: 26px;
+      height: 120px;
+      background: #fffdf9;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #2a1829;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 1;
+    }
+    .envelope-wrap.opened .letter-slip {
+      transform: translateY(-56px);
+    }
+    .letter-slip span { font-family: 'Caveat', cursive; font-size: 20px; color: var(--rose); }
+    .letter-slip strong { font-family: 'Cormorant Garamond', serif; font-size: 26px; }
+
+    .env-pocket {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 138px;
+      background: linear-gradient(145deg, #2a1f3d, #1b1329);
+      border: 1px solid rgba(245, 203, 122, 0.35);
+      border-radius: 16px;
+      z-index: 2;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 14px;
+      color: #f5cb7a;
+      font-size: 12px;
+      letter-spacing: 0.6px;
+    }
+    .wax-seal {
+      position: absolute;
+      top: 38px; left: 50%;
+      transform: translateX(-50%);
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ff758f, #c9184a);
+      border: 2px solid #f5cb7a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff3b0;
+      z-index: 3;
+      box-shadow: 0 6px 18px rgba(201, 24, 74, 0.55);
+      animation: sealPulse 2s infinite;
+    }
+    @keyframes sealPulse {
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.08); }
+    }
+
+    /* Screen 3: Greeting Card */
+    .glass-badge {
+      display: inline-block;
+      padding: 7px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid #ffb3c6;
+      color: #c9184a;
+      font-weight: 600;
+      font-size: 13px;
+      margin: 8px 0 18px;
+    }
+    .hero-emoji-box {
+      font-size: 56px;
+      margin: 8px 0 22px;
+      filter: drop-shadow(0 8px 14px rgba(255, 77, 141, 0.25));
+    }
+
+    /* Screen 4: Interactive Cake */
+    .cake-arena {
+      width: 250px;
+      height: 205px;
+      margin: 10px auto 20px;
+      position: relative;
+      touch-action: none;
+      cursor: ns-resize;
+    }
+    .half-cake {
+      position: absolute;
+      top: 32px;
+      width: 112px;
+      height: 142px;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .half-left {
+      left: 12px;
+      border-radius: 20px 0 8px 16px;
+      background: linear-gradient(180deg, #fff 0%, #fff 26%, #ff8fab 26%, #ff8fab 60%, #ffc2d1 60%, #ffc2d1 100%);
+      border: 2px solid #ff4d8d;
+      border-right: none;
+    }
+    .half-right {
+      right: 12px;
+      border-radius: 0 20px 16px 8px;
+      background: linear-gradient(180deg, #fff 0%, #fff 26%, #ff758f 26%, #ff758f 60%, #ffb3c6 60%, #ffb3c6 100%);
+      border: 2px solid #ff4d8d;
+      border-left: none;
+    }
+    .candle-stick {
+      position: absolute;
+      top: -30px; left: 50%;
+      transform: translateX(-50%);
+      width: 10px; height: 30px;
+      background: repeating-linear-gradient(45deg, #f5cb7a, #f5cb7a 4px, #ff4d8d 4px, #ff4d8d 8px);
+      border-radius: 4px;
+    }
+    .candle-fire {
+      position: absolute;
+      top: -17px; left: 50%;
+      transform: translateX(-50%);
+      width: 12px; height: 17px;
+      background: radial-gradient(circle, #fff3b0 20%, #ff7b00 85%);
+      border-radius: 50%;
+      box-shadow: 0 0 14px #ff9e00;
+      animation: flicker 0.35s infinite alternate;
+    }
+    @keyframes flicker {
+      from { transform: translateX(-50%) scale(0.95); }
+      to { transform: translateX(-50%) scale(1.12); }
+    }
+    .slice-guide {
+      position: absolute;
+      top: 4px; bottom: 10px; left: 50%;
+      border-left: 2.5px dashed #c9184a;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .cake-arena.sliced .half-left { transform: translateX(-16px) rotate(-3.5deg); }
+    .cake-arena.sliced .half-right { transform: translateX(16px) rotate(3.5deg); }
+    .cake-arena.sliced .slice-guide { opacity: 0; }
+
+    .plate-base {
+      position: absolute;
+      bottom: 6px; left: 50%;
+      transform: translateX(-50%);
+      width: 230px; height: 14px;
+      background: #fff;
+      border-radius: 999px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+    }
+
+    /* Screen 6: 4 Teddy & Bunny Polaroid Templates */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px;
+      margin: 8px 0 22px;
+    }
+    .frame-card {
+      background: #ffffff;
+      padding: 8px 8px 12px;
+      border-radius: 12px;
+      box-shadow: 0 10px 24px rgba(201, 24, 74, 0.13);
+      border: 1px solid #ffd6e0;
+      transition: transform 0.3s ease;
+    }
+    .frame-card:nth-child(1) { transform: rotate(-2deg); }
+    .frame-card:nth-child(2) { transform: rotate(2deg); }
+    .frame-card:nth-child(3) { transform: rotate(1.5deg); }
+    .frame-card:nth-child(4) { transform: rotate(-1.5deg); }
+    .frame-card:hover { transform: rotate(0deg) scale(1.03); }
+
+    .art-canvas {
+      width: 100%;
+      height: 128px;
+      background: linear-gradient(160deg, #fff5f8 0%, #ffe8f0 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid #ffd6e4;
+    }
+    .art-canvas svg {
+      width: 106px;
+      height: 106px;
+      animation: gentleBounce 2.8s ease-in-out infinite;
+    }
+    .frame-card:nth-child(2) .art-canvas svg { animation-delay: 0.5s; }
+    .frame-card:nth-child(3) .art-canvas svg { animation-delay: 1s; }
+    .frame-card:nth-child(4) .art-canvas svg { animation-delay: 1.5s; }
+
+    @keyframes gentleBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .frame-note {
+      font-family: 'Caveat', cursive;
+      font-size: 19px;
+      color: #2a1829;
+      margin-top: 6px;
+    }
+
+    /* Screen 7: Letter */
+    .parchment {
+      background: rgba(255, 253, 249, 0.94);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid #f7cad8;
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: left;
+      box-shadow: 0 15px 35px rgba(201, 24, 74, 0.14);
+      margin-bottom: 22px;
+    }
+    .parchment .kicker {
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--rose);
+      font-weight: 600;
+    }
+    .parchment h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 27px;
+      color: #2a1829;
+      margin: 4px 0 12px;
+    }
+    .parchment .text {
+      font-size: 13.5px;
+      line-height: 1.78;
+      color: #3d2438;
+      white-space: pre-line;
+    }
+
+    /* Confetti */
+    .sparkle {
+      position: fixed;
+      top: -12px;
+      width: 9px;
+      height: 9px;
+      z-index: 1;
+      animation: dropSparkle linear forwards;
+    }
+    @keyframes dropSparkle {
+      to { transform: translateY(105vh) rotate(720deg); }
+    }
+  </style>
+<meta property="og:title" content="For Madam Jii • 26 November ✨" data-id="th-modified" ><meta name="description" content="index" data-id="th-modified" ><meta property="og:description" content="index" data-id="th-modified" ><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified" ><meta property="og:image:width" content="1501" data-id="th-modified" ><meta property="og:image:height" content="1501" data-id="th-modified" ><meta property="og:image:type" content="image/png" data-id="th-modified" ><meta property="og:url" content="https://harlequin-lilias-60.tiiny.site/" data-id="th-modified" ><meta property="og:type" content="website" data-id="th-modified" ><script defer data-domain="harlequin-lilias-60.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
+<body>
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- Fairy Lights -->
+  <div class="fairy-lights">
+    <div class="bulb"></div><div class="bulb"></div><div class="bulb"></div>
+    <div class="bulb"></div><div class="bulb"></div><div class="bulb"></div>
+    <div class="bulb"></div><div class="bulb"></div><div class="bulb"></div>
+  </div>
+
+  <div class="stage">
+    <!-- 0. Password Lock Screen -->
+    <div class="screen active" id="step-0">
+      <div class="lock-card" id="lockCard">
+        <div style="font-size:44px;margin-bottom:8px;">🔐</div>
+        <div class="script-tag" style="color:#f5cb7a;">Secret Entry</div>
+        <h1>Private Surprise<br>For <em>Madam Jii</em></h1>
+        <p class="desc" style="margin-bottom:16px;">Hint: Aapka special birthday date (DDMM — jaise 2611)</p>
+        <input type="password" class="pass-input" id="passInput" placeholder="Enter password" maxlength="12" onkeydown="if(event.key==='Enter') checkPassword()">
+        <div class="err-msg" id="errMsg"></div>
+        <button class="btn-gold" onclick="checkPassword()">Unlock Surprise 🔓</button>
+      </div>
+    </div>
+
+    <!-- 1. Wax-Sealed Envelope -->
+    <div class="screen" id="step-1">
+      <div class="script-tag">A little magic for you</div>
+      <h1>There's something<br><em>for you</em></h1>
+      <p class="desc">Tap the wax seal to open a birthday surprise made just for Madam Jii.</p>
+
+      <div class="envelope-wrap" id="envWrap" onclick="unlockEnvelope()">
+        <div class="letter-slip">
+          <span>especially for</span>
+          <strong>Shreya ✨</strong>
+        </div>
+        <div class="wax-seal">S</div>
+        <div class="env-pocket">TAP TO UNSEAL 💌</div>
+      </div>
+
+      <button class="btn-luxe" onclick="unlockEnvelope()">Open Your Surprise</button>
+    </div>
+
+    <!-- 2. Midnight Room -->
+    <div class="screen" id="step-2">
+      <div style="font-size:48px;margin-bottom:10px;">✨🌙✨</div>
+      <div class="script-tag" style="color:#f5cb7a;">Shhh...</div>
+      <h1>The room is<br>waiting for you.</h1>
+      <p class="desc">Someone kept the lights dimmed just for this moment.</p>
+      <button class="btn-gold" onclick="illuminateRoom()">Turn On The Lights 💡</button>
+    </div>
+
+    <!-- 3. Birthday Reveal -->
+    <div class="screen" id="step-3">
+      <div class="script-tag">Look who's celebrating today...</div>
+      <h1>Happy Birthday,<br><em>Shreya</em> ✨</h1>
+      <div class="glass-badge">🎂 26 November • Madam Jii</div>
+      <div class="hero-emoji-box">🧸🎈💐</div>
+      <button class="btn-luxe" onclick="showStep(4)">There's more 👉</button>
+    </div>
+
+    <!-- 4. Cake Cutting -->
+    <div class="screen" id="step-4">
+      <div class="script-tag">Sweetest ritual</div>
+      <h1>Make the first cut</h1>
+      <p class="desc" id="sliceHint">Swipe down across the cake, top to bottom (or tap).</p>
+
+      <div class="cake-arena" id="cakeArena"
+           ontouchstart="touchStart(event)"
+           ontouchend="touchEnd(event)"
+           onmousedown="touchStart(event)"
+           onmouseup="touchEnd(event)"
+           onclick="sliceCake()">
+        <div class="slice-guide"></div>
+        <div class="half-cake half-left">
+          <div class="candle-stick"><div class="candle-fire"></div></div>
+        </div>
+        <div class="half-cake half-right">
+          <div class="candle-stick"><div class="candle-fire"></div></div>
+        </div>
+        <div class="plate-base"></div>
+      </div>
+
+      <button class="btn-luxe" id="afterCakeBtn" style="display:none;" onclick="showStep(5)">Make a wish ✨</button>
+    </div>
+
+    <!-- 5. Make a Wish -->
+    <div class="screen" id="step-5">
+      <h1 id="wishHead">Close your eyes...</h1>
+      <p class="desc" id="wishBody">Make a quiet wish for everything your heart hopes for this year.</p>
+      <div style="font-size:62px;margin:10px 0 20px;">🕯️✨🧸</div>
+      <button class="btn-luxe" id="wishAction" onclick="confirmWish()">I made my wish ✨</button>
+    </div>
+
+    <!-- 6. 4 Teddy & Bunny Polaroid Templates -->
+    <div class="screen" id="step-6">
+      <h1>Some moments are<br><em>worth keeping</em> forever.</h1>
+      <p class="desc">Little teddy & bunny wishes for Madam Jii's special day.</p>
+
+      <div class="gallery-grid">
+        <div class="frame-card">
+          <div class="art-canvas">
+            <svg viewBox="0 0 120 120" fill="none">
+              <circle cx="34" cy="36" r="14" fill="#d99b66"></circle>
+              <circle cx="34" cy="36" r="7" fill="#f7cfa8"></circle>
+              <circle cx="86" cy="36" r="14" fill="#d99b66"></circle>
+              <circle cx="86" cy="36" r="7" fill="#f7cfa8"></circle>
+              <ellipse cx="60" cy="84" rx="26" ry="24" fill="#d99b66"></ellipse>
+              <ellipse cx="60" cy="86" rx="15" ry="14" fill="#f7cfa8"></ellipse>
+              <circle cx="60" cy="54" r="24" fill="#e3a874"></circle>
+              <circle cx="51" cy="51" r="3" fill="#2d1b29"></circle>
+              <circle cx="69" cy="51" r="3" fill="#2d1b29"></circle>
+              <ellipse cx="60" cy="58" rx="5" ry="3.5" fill="#7c4432"></ellipse>
+              <path d="M55 63 Q60 68 65 63" stroke="#2d1b29" stroke-width="2" stroke-linecap="round"></path>
+              <path d="M60 88 C52 81 44 87 50 95 L60 103 L70 95 C76 87 68 81 60 88 Z" fill="#ff4d8d"></path>
+            </svg>
+          </div>
+          <div class="frame-note">Heartful wishes 💕</div>
+        </div>
+
+        <div class="frame-card">
+          <div class="art-canvas">
+            <svg viewBox="0 0 120 120" fill="none">
+              <ellipse cx="46" cy="28" rx="8" ry="22" transform="rotate(-10 46 28)" fill="#ffc2d4"></ellipse>
+              <ellipse cx="46" cy="29" rx="4" ry="15" transform="rotate(-10 46 29)" fill="#ff8fab"></ellipse>
+              <ellipse cx="74" cy="28" rx="8" ry="22" transform="rotate(10 74 28)" fill="#ffc2d4"></ellipse>
+              <ellipse cx="74" cy="29" rx="4" ry="15" transform="rotate(10 74 29)" fill="#ff8fab"></ellipse>
+              <ellipse cx="60" cy="86" rx="23" ry="21" fill="#ffc2d4"></ellipse>
+              <circle cx="60" cy="58" r="22" fill="#ffd6e0"></circle>
+              <circle cx="52" cy="55" r="2.8" fill="#2d1b29"></circle>
+              <circle cx="68" cy="55" r="2.8" fill="#2d1b29"></circle>
+              <circle cx="46" cy="61" r="4" fill="#ff8fab" opacity="0.7"></circle>
+              <circle cx="74" cy="61" r="4" fill="#ff8fab" opacity="0.7"></circle>
+              <circle cx="60" cy="61" r="3" fill="#ff4d8d"></circle>
+              <path d="M56 66 Q60 70 64 66" stroke="#2d1b29" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div class="frame-note">Sweetest bunny ✨</div>
+        </div>
+
+        <div class="frame-card">
+          <div class="art-canvas">
+            <svg viewBox="0 0 120 120" fill="none">
+              <polygon points="60,12 48,36 72,36" fill="#ffd166" stroke="#f4a261" stroke-width="2"></polygon>
+              <circle cx="60" cy="11" r="4" fill="#ff4d8d"></circle>
+              <circle cx="35" cy="40" r="12" fill="#c68b59"></circle>
+              <circle cx="85" cy="40" r="12" fill="#c68b59"></circle>
+              <circle cx="60" cy="56" r="22" fill="#d49a6a"></circle>
+              <ellipse cx="60" cy="87" rx="24" ry="21" fill="#d49a6a"></ellipse>
+              <circle cx="52" cy="53" r="2.8" fill="#2d1b29"></circle>
+              <circle cx="68" cy="53" r="2.8" fill="#2d1b29"></circle>
+              <circle cx="60" cy="60" r="4" fill="#5c3a21"></circle>
+              <path d="M55 65 Q60 70 65 65" stroke="#2d1b29" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div class="frame-note">Party time 🎈</div>
+        </div>
+
+        <div class="frame-card">
+          <div class="art-canvas">
+            <svg viewBox="0 0 120 120" fill="none">
+              <ellipse cx="47" cy="29" rx="7.5" ry="20" transform="rotate(-12 47 29)" fill="#fff0f5" stroke="#ff8fab" stroke-width="2"></ellipse>
+              <ellipse cx="73" cy="29" rx="7.5" ry="20" transform="rotate(12 73 29)" fill="#fff0f5" stroke="#ff8fab" stroke-width="2"></ellipse>
+              <circle cx="60" cy="58" r="22" fill="#fff5f8" stroke="#ff8fab" stroke-width="2"></circle>
+              <ellipse cx="60" cy="87" rx="22" ry="20" fill="#fff5f8" stroke="#ff8fab" stroke-width="2"></ellipse>
+              <circle cx="52" cy="55" r="2.8" fill="#2d1b29"></circle>
+              <circle cx="68" cy="55" r="2.8" fill="#2d1b29"></circle>
+              <circle cx="60" cy="61" r="3" fill="#ff5c8a"></circle>
+              <circle cx="76" cy="44" r="6" fill="#ffd166"></circle>
+              <circle cx="76" cy="44" r="2.5" fill="#ff4d8d"></circle>
+            </svg>
+          </div>
+          <div class="frame-note">Pure grace 🌷</div>
+        </div>
+      </div>
+
+      <button class="btn-luxe" onclick="showStep(7)">Read your letter 💌</button>
+    </div>
+
+    <!-- 7. Handwritten Letter -->
+    <div class="screen" id="step-7">
+      <div class="parchment">
+        <div class="kicker">From the heart</div>
+        <h2>For you, Shreya</h2>
+        <div class="text">Happy birthday, Madam Jii.
+
+Sach kahun toh hamari baat abhi kuch hi dino se shuru hui hai, par itne kam waqt mein bhi aap ek bahut hi special aur genuine friend ban gayi hain.
+
+Aapka andaaz, aapki simplicity aur aapki positive vibe sach mein bahut achhi lagti hai. Isliye socha ki aapke is khaas din par ek chhota sa surprise zaroor hona chahiye.
+
+Dua hai ki aane wala saal aapke liye dher saari khushiyan, sukoon aur har woh cheez lekar aaye jo aap chahti hain. Aap hamesha aise hi muskurati rahein.
+
+Happy birthday once again, Madam Jii. Today is all yours. ✨</div>
+      </div>
+      <button class="btn-luxe" onclick="showStep(8)">One last thing 👉</button>
+    </div>
+
+    <!-- 8. Grand Finale -->
+    <div class="screen" id="step-8">
+      <div style="font-size:66px;margin:10px 0;">🧸🎂🎈</div>
+      <h1>Happy Birthday,<br><em>Shreya!</em> ✨</h1>
+      <p class="desc">May every day ahead feel as warm and bright as your smile.</p>
+      <div class="script-tag" style="font-size:26px;margin-bottom:22px;">— Someone who values you a lot 🌷</div>
+      <button class="btn-luxe" onclick="restartShow()">Replay the surprise 🔄</button>
+    </div>
+  </div>
+
+  <script>
+    // Yahan apna password badal sakte hain (abhi "2611" hai)
+    const SECRET_PASS = "2611";
+
+    let dragStartY = 0;
+    let sliced = false;
+    let wished = false;
+
+    function checkPassword() {
+      const val = document.getElementById("passInput").value.trim().toLowerCase();
+      const err = document.getElementById("errMsg");
+      const card = document.getElementById("lockCard");
+
+      if (val === SECRET_PASS.toLowerCase()) {
+        err.innerText = "";
+        playChime(659.25);
+        showStep(1);
+      } else {
+        err.innerText = "Galat password! Hint: 2611 try karein.";
+        card.classList.remove("shake");
+        void card.offsetWidth;
+        card.classList.add("shake");
+      }
+    }
+
+    function playChime(freq = 523.25) {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.5, ctx.currentTime + 0.35);
+        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.45);
+      } catch (e) {}
+    }
+
+    function showStep(n) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('step-' + n).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function unlockEnvelope() {
+      playChime(587.33);
+      document.getElementById('envWrap').classList.add('opened');
+      setTimeout(() => showStep(2), 750);
+    }
+
+    function illuminateRoom() {
+      playChime(659.25);
+      document.body.classList.add('lit');
+      burstConfetti();
+      showStep(3);
+    }
+
+    function touchStart(e) {
+      dragStartY = e.touches ? e.touches[0].clientY : e.clientY;
+    }
+
+    function touchEnd(e) {
+      const endY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+      if (endY - dragStartY > 25) sliceCake();
+    }
+
+    function sliceCake() {
+      if (sliced) return;
+      sliced = true;
+      playChime(783.99);
+      document.getElementById('cakeArena').classList.add('sliced');
+      document.getElementById('sliceHint').innerHTML = "<strong>You did it! 🎉</strong> The first slice is always the sweetest one.";
+      document.getElementById('afterCakeBtn').style.display = 'inline-block';
+      burstConfetti();
+    }
+
+    function confirmWish() {
+      if (!wished) {
+        wished = true;
+        playChime(880);
+        document.getElementById('wishHead').innerText = "Your wish is on its way ✨";
+        document.getElementById('wishBody').innerText = "Somewhere, a tiny star just whispered yes.";
+        document.getElementById('wishAction').innerText = "See special moments →";
+        burstConfetti();
+      } else {
+        showStep(6);
+      }
+    }
+
+    function restartShow() {
+      sliced = false;
+      wished = false;
+      document.getElementById('passInput').value = "";
+      document.getElementById('envWrap').classList.remove('opened');
+      document.body.classList.remove('lit');
+      document.getElementById('cakeArena').classList.remove('sliced');
+      document.getElementById('sliceHint').innerText = "Swipe down across the cake, top to bottom (or tap).";
+      document.getElementById('afterCakeBtn').style.display = 'none';
+      document.getElementById('wishHead').innerText = "Close your eyes...";
+      document.getElementById('wishBody').innerText = "Make a quiet wish for everything your heart hopes for this year.";
+      document.getElementById('wishAction').innerText = "I made my wish ✨";
+      showStep(0);
+    }
+
+    function burstConfetti() {
+      const colors = ['#ff4d8d', '#f5cb7a', '#ff85b3', '#a0c4ff', '#cdb4db'];
+      for (let i = 0; i < 45; i++) {
+        const el = document.createElement('div');
+        el.className = 'sparkle';
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        el.style.animationDuration = (Math.random() * 1.8 + 1.8) + 's';
+        el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 3800);
+      }
+    }
+  </script>
+</body>
+</html>
